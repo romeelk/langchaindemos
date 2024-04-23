@@ -2,37 +2,26 @@ import os
 
 from langchain_openai import AzureChatOpenAI
 from langchain_core.messages import HumanMessage
-from langchain.llms import AzureOpenAI
-
-env_vars = ["AZURE_OPENAI_API_KEY","AZURE_OPENAI_ENDPOINT","OPENAI_API_VERSION"]
-
-def load_env_settings() -> bool:
-    keys_found = True
-    for var in env_vars:
-        if var in os.environ:
-            print(f"Checking for Azure Open AI env vars: Found matching key {var}")
-        else:
-            keys_found = False
-            break
-    return keys_found
-
-result = load_env_settings()
-
-if(result == False):
-    print("Could not load Azure Open AI settings from environmnt vars")
-    for env_var in env_vars:
-        print(f'Make sure the following env vars are set {env_var}')
-else:
-    quit()
+from dotenv import load_dotenv
+from openai import  APIConnectionError
+from openai import AuthenticationError
+load_dotenv()   
 
 llm = AzureChatOpenAI(
-    azure_deployment="gpt4",
-    openai_api_version="2023-05-15",
+    azure_deployment=os.getenv("AZURE_OPENAI_CHATGPT_DEPLOYMENT"),
+    openai_api_version=os.getenv("OPENAI_API_VERSION")
 )
 
 message = HumanMessage(
     content="Translate this sentence from English to French. My age is 10 years."
 )
-response = llm.invoke([message])
 
-print(response.content)
+print(message)
+
+try:
+    response = llm.invoke([message])
+    print(response.content)
+except APIConnectionError as ApiError:
+    print(f"An error occured when connecting to Azure Open AI. Error:{ApiError.message}")
+except AuthenticationError as AuthError:
+    print(f"An error occured whilst authenticating to Azure Open AI: {AuthError.message}")
