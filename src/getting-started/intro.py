@@ -5,6 +5,7 @@ from langchain_core.messages import HumanMessage
 from dotenv import load_dotenv
 from openai import  APIConnectionError
 from openai import AuthenticationError
+
 load_dotenv()   
 
 llm = AzureChatOpenAI(
