@@ -31,7 +31,7 @@ try:
         )
         print(response.content)
         # without specifying the model version, flat-rate 0.002 USD per 1k input and output tokens is used
-except APIConnectionError as ApiError:
-    print(f"An error occured  connecting to Azure Open AI. Error: {ApiError.message}")
-except AuthenticationError as AuthError:
-    print(f"An error occured whilst authenticating to Azure Open AI: {AuthError.message}")
+    except APIConnectionError as ApiError:
+        print(f"An error occured  connecting to Azure Open AI. Error: {ApiError.message}")
+    except AuthenticationError as AuthError:
+        print(f"An error occured whilst authenticating to Azure Open AI: {AuthError.message}")
