@@ -6,8 +6,7 @@ from dotenv import load_dotenv
 from openai import APIConnectionError
 from openai import AuthenticationError
 from langchain_core.prompts import PromptTemplate
-
-load_dotenv()   
+ 
 
 def prompt_composition():
     try:
