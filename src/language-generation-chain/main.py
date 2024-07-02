@@ -20,7 +20,7 @@ def print_pythoncode(args):
         temperature=0.0
     )
     try:
-        prompt = ChatPromptTemplate.from_template("Write a short language function using {language} that will descirbe task {task}")
+        prompt = ChatPromptTemplate.from_template("Write a short language function using {language} that will describe task {task}")
    
         code_chain = prompt | llm | {"code:" :StrOutputParser()}
 
