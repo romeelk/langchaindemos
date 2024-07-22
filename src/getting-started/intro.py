@@ -20,7 +20,7 @@ def getting_started():
     print(message)
 
     try:
-        response = llm.invoke([message])
+        response = llm([message])
         print(response.content)
     except APIConnectionError as ApiError:
         print(f"An error occured when connecting to Azure Open AI. Error:{ApiError.message}")
