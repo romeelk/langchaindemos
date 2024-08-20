@@ -1,35 +1,45 @@
 from langchain_openai import AzureChatOpenAI
-from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import RunnablePassthrough, RunnableLambda
+from langchain_core.prompts import PromptTemplate, ChatPromptTemplate, HumanMessagePromptTemplate
+from langchain_core.prompts.chat import MessagesPlaceholder
 import os
 from dotenv import load_dotenv
-from langchain.memory import ChatMessageHistory
+from langchain.memory import ConversationBufferMemory
+from langchain_core.output_parsers import StrOutputParser
+from langchain_community.chat_message_histories import ChatMessageHistory
+from langchain_core.chat_history import BaseChatMessageHistory
+from langchain_core.runnables.history import RunnableWithMessageHistory
 
+# based on: https://python.langchain.com/v0.1/docs/expression_language/how_to/message_history/
 load_dotenv()
-
-
-city = "Tell me about city {city}"
-
-prompt = PromptTemplate(
-    input_variables=["city"],
-    template=city,
-)
-
-description = "It is software dev firm specifically focusing on automation software"
 
 llm = AzureChatOpenAI(
     azure_deployment=os.getenv("AZURE_OPENAI_CHATGPT_DEPLOYMENT"),
     openai_api_version=os.getenv("OPENAI_API_VERSION"),
     model_version="0301",   
 )   
+store = {}
 
-chain = prompt | llm 
+def get_session_history(session_id: str) -> BaseChatMessageHistory:
+    if session_id not in store:
+        store[session_id] = ChatMessageHistory()
+    return store[session_id]
 
-response = chain.invoke("New york")
 
-print(response.content)
+prompt = ChatPromptTemplate(input_variables=["content"],
+                            messages=[MessagesPlaceholder(variable_name="messages"),
+                                HumanMessagePromptTemplate.from_template("{content}")])
 
-message_history = ChatMessageHistory()
+runnable = prompt | llm 
 
-message_history.add_user_message(response.content)
+with_message_history = RunnableWithMessageHistory(
+    runnable,
+    get_session_history,
+    input_messages_key="content",
+    history_messages_key="messages",
+)
 
-print("history-->" +str(message_history.messages))
+while True:
+    content = input("input>>")
+    response = with_message_history.invoke({"content":content}, config={"configurable": {"session_id": "abc123"}})
+    print(response.content)
