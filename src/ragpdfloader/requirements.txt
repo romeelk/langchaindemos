@@ -1,0 +1,10 @@
+langchain
+langchain-openai
+python-dotenv
+langchain-community
+bs4
+validators
+langchain_text_splitters
+langchain_chroma
+chromadb==0.5.3
+pdfminer.six
