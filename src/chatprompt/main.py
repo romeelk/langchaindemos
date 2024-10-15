@@ -16,7 +16,6 @@ prompt  = ChatPromptTemplate.from_messages([
     ("user", "{input}")
 ])
 
-
 chain = prompt | llm | StrOutputParser()
 
 response = chain.invoke({"input": "how can langsmith help with testing?"})
