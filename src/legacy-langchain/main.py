@@ -1,15 +1,18 @@
 
-import openai
 import os
-from langchain import OpenAI
-
-print("Langchain basics")
+from langchain_openai import ChatOpenAI
+from langchain.chains.llm import LLMChain
 from dotenv import load_dotenv
+from langchain_core.prompts import PromptTemplate
 
+print("Langchain basics. Legacy chain")
 
 load_dotenv()
-llm = OpenAI(openai_api_key=os.getenv("OPENAI_API_KEY"))
+llm = ChatOpenAI(openai_api_key=os.getenv("OPENAI_API_KEY"), model="gpt-4o-mini")
 
-result = llm.invoke("What is Open AI?")
+prompt = PromptTemplate.from_template("Summarise the following {topic}.")
 
-print(result)
+chain  = LLMChain(llm=llm,prompt=prompt)
+
+response = chain.invoke(prompt.format(topic="Large Language Models"))
+print(response['text'])

@@ -54,7 +54,7 @@ while True:
     content = input(">>")
 
     if content == "exit":
-        sys.exit()
+        sys.exit(0)
     rag_chain = {"context": retriever | format_docs, "content": RunnablePassthrough()} | prompt | llm | StrOutputParser()
 
     print(rag_chain.invoke(content))
