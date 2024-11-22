@@ -6,7 +6,6 @@ from langchain_openai import ChatOpenAI
 import os
 from langchain_core.output_parsers import StrOutputParser
 
-
 load_dotenv()
 
 llm = ChatOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
