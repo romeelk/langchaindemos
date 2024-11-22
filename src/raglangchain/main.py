@@ -1,3 +1,5 @@
+# https://python.langchain.com/v0.2/docs/versions/migrating_chains/retrieval_qa/
+
 import os
 import getpass
 import bs4
@@ -23,7 +25,6 @@ llm = ChatOpenAI(model="gpt-4o-mini")
 print("Langchain RAG demo")
 
 print("Loading doc from web: https://lilianweng.github.io/posts/2023-06-23-agent/")
-
 
 loader = WebBaseLoader(
     web_paths=("https://lilianweng.github.io/posts/2023-06-23-agent/",),

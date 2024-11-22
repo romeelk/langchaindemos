@@ -2,11 +2,9 @@ import os
 import argparse
 
 from langchain_openai import AzureChatOpenAI
-from langchain_core.messages import HumanMessage
 from dotenv import load_dotenv
 from openai import APIConnectionError
 from openai import AuthenticationError
-from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 
