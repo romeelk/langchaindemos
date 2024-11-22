@@ -10,7 +10,6 @@ load_dotenv()
 prompt = ChatPromptTemplate(input_variables=["content"],
 messages=[HumanMessagePromptTemplate.from_template("{content}")])
 
-
 llm = AzureChatOpenAI(
     azure_deployment=os.getenv("AZURE_OPENAI_CHATGPT_DEPLOYMENT"),
     openai_api_version=os.getenv("OPENAI_API_VERSION"),
