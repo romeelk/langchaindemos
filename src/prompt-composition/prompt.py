@@ -17,11 +17,11 @@ def prompt_composition():
         llm = AzureChatOpenAI(
         azure_deployment=os.getenv("AZURE_OPENAI_CHATGPT_DEPLOYMENT"),
         openai_api_version=os.getenv("OPENAI_API_VERSION"),
-        model_version="0301"
+        model_version="2024-07-18"
         )
         chain = prompt | llm
 
-        response = chain.invoke("your adjective here")
+        response = chain.invoke({"adjective":"running"})
         print(response.content)
 
     except APIConnectionError as ApiError:

@@ -4,12 +4,13 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain_openai import AzureOpenAIEmbeddings
 from dotenv import load_dotenv 
 from langchain_chroma import Chroma
+
 load_dotenv()
 
 # create AzureOpenAIEmbeddings to calculate embeddings
 embeddings = AzureOpenAIEmbeddings()
 
-# load the ext
+# load the facts
 text_loader = TextLoader("facts.txt")
 
 # load the CharacterTextSplitter a split on new line
