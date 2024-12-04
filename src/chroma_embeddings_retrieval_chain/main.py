@@ -14,7 +14,7 @@ llm = AzureChatOpenAI(
     )
 
 db = Chroma.from_texts(["harrison worked at kensho", "bears like to eat honey","Tom worked in London","Tom is an AI Consultant"],
-    embedding=AzureOpenAIEmbeddings(),)
+    embedding=AzureOpenAIEmbeddings())
 
 retriever = db.as_retriever()
 
