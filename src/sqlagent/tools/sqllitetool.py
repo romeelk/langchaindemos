@@ -24,7 +24,6 @@ class SqlLiteTool(BaseTool):
         except sqlite3.OperationalError as e:
             return f"The following error occured: {e}"
        
-
     async def _arun(self, query: str) -> str:
         """Use the tool."""
         cursor = conn.cursor()
