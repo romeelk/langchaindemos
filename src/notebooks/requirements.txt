@@ -3,3 +3,4 @@ langchain-openai
 langchain_experimental
 chromadb
 matplotlib
+langchain_core.agents
