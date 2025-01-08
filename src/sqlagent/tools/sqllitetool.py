@@ -1,6 +1,6 @@
 import sqlite3
 from pydantic import BaseModel
-from langchain_core.tools import BaseTool
+from langchain_core.tools import BaseTool, tool
 
 conn = sqlite3.connect('db.sqlite')
 
@@ -30,3 +30,18 @@ class SqlLiteTool(BaseTool):
         cursor.execute(query)
         rows = cursor.fetchall()
         return rows
+
+@tool
+def describe_tables(table_names: str) -> str:
+    """
+    Lists sqllite tables 
+    Args:
+        table_names (str): The table_names.
+
+    Returns:
+        str: A list of tables
+    """
+    conn = sqlite3.connect('db.sqlite')
+    tables = ','.join("'" + table_name + "'" for table_name in table_names.split(","))
+    rows = conn.execute(f"SELECT sql FROM sqlite_master WHERE type='table' AND name IN ({tables})").fetchall()
+    return '\n'.join([row[0] for row in rows if row[0] is not None])
