@@ -1,8 +1,11 @@
 # Tutorial source = https://cloud.google.com/vertex-ai/generative-ai/docs/start/quickstarts/quickstart-multimodal#python
 import vertexai
 from vertexai.generative_models import GenerativeModel
+from dotenv import load_dotenv
+import os
 
-PROJECT_ID = "projectid"
+load_dotenv
+PROJECT_ID = os.getenv("PROJECT_ID")
 
 # init vertex AI
 vertexai.init(project=PROJECT_ID, location="us-central1")
