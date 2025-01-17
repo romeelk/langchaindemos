@@ -2,7 +2,7 @@
 import vertexai
 from vertexai.generative_models import GenerativeModel
 
-PROJECT_ID = "contini-5aa3a3d90477d2d3"
+PROJECT_ID = "projectid"
 
 # init vertex AI
 vertexai.init(project=PROJECT_ID, location="us-central1")
