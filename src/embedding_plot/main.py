@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-
-# Embedding dimensions: Formaility, Negativity , Activity (three dimensions)
+# based on https://honnuanand.medium.com/deciphering-the-dimensions-of-embeddings-a-journey-into-semantic-spaces-ede0ec3b8b5c
+# Embedding dimensions: Formaility, Negativity , Activity (three dimensions) - three dimensions
 words = ["Hello", "Shutup", "Go away", "Run", "Walk"]
 
 # Embedding dimensions
