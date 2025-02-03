@@ -5,7 +5,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
-from langchain_chroma import Chroma
+from langchain.vectorstores import Chroma
 
 load_dotenv()
 llm = AzureChatOpenAI(
